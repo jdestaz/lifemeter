@@ -1,0 +1,30 @@
+<!doctype>
+<html>
+	<head>
+		<!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+		
+		<script type="text/javascript" src="life-expectancy-data.js"></script>
+		<script type="text/javascript" src="lifemeter.js"></script> <!-- data -->
+		<script type="text/javascript" src="canvas.js"></script> <!-- graphics mapulation -->
+		<script type="text/javascript" src="default-style.js"></script> <!-- this game's style -->
+		
+		<script type="text/javascript">
+			window.onload = function() {
+			
+				lifemeter.init({
+					month: 3,
+					day: 12,
+					year: 1984,
+					data: data.male
+				});
+				
+				lifemeter.calculate();
+				
+				lifemeter.toLog();
+			};
+		</script>
+	</head>
+	<body>
+		<canvas id="lifemeter-canvas"></canvas>
+	</body>
+</html>

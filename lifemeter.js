@@ -3,7 +3,7 @@ var lifemeter = {
 	birthMonth: 0,
 	birthDay: 0,
 	birthYear: 0,
-	birthdate: new Date(),
+	birthDate: new Date(),
 	currentDate: new Date(),
 	expectancyData: [],
 	results: {},

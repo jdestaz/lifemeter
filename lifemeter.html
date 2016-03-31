@@ -12,15 +12,31 @@
 			window.onload = function() {
 			
 				lifemeter.init({
-					month: 3,
-					day: 12,
-					year: 2016,
+					month: 7,
+					day: 10,
+					year: 1984,
 					data: data.male
 				});
 				
 				lifemeter.calculate();
 				
 				lifemeter.toLog();
+				
+				
+				function loadImages(sources, callbackFunc) {
+					var images = {};
+					var loadedImages = 0;
+					var numImages = Object.keys(sources).length;
+
+					for(var source in sources) {
+						images[source] = new Image();
+						images[source].onload = function() {
+							if(++loadedImages >= numImages)
+								callbackFunc(images);
+						};
+						images[source].src = sources[source];
+					}
+				}
 				
 				// build canvas 
 				var canvas = document.getElementById('lifemeter-canvas');
@@ -30,32 +46,30 @@
 					canvas.height = 300;
 					var ctx = canvas.getContext('2d');
 					
-					// todo: preload images http://www.html5canvastutorials.com/tutorials/html5-canvas-image-loader/
-					var bg = new Image();
-					bg.addEventListener('load', function() {
-						ctx.drawImage(bg, 0, 0);
-					}, false);
-					bg.src = 'bg.png';
+					var sources = {
+						bg: 'bg.png',
+						meterBg: 'meterbg.png',
+						meterBar: 'meterbar.png'
+					};
 					
-					var meterBg = new Image();
-					meterBg.addEventListener('load', function() {
-						ctx.drawImage(meterBg, 10, 10);
-					}, false);
-					meterBg.src = 'meterbg.png';
+					loadImages(sources, function(images) {
 					
-					var meterBar = new Image();
-					meterBar.addEventListener('load', function() {
+						ctx.drawImage(images.bg, 0, 0);
+						ctx.drawImage(images.meterBg, 10, 10);
+						
 						var barHeight = 4;
 						var barBottom = 117;
 						var numBarsFullHealth = 28;
 						var numBarsCurrentHealth = Math.round(numBarsFullHealth * lifemeter.results.meterValue);
 						
+						if(numBarsCurrentHealth < 1)
+							numBarsCurrentHealth = 1;
+						
 						for(var x = 0; x < numBarsCurrentHealth; x++) {
-							ctx.drawImage(meterBar, 10, barBottom - (barHeight* x));
+							ctx.drawImage(images.meterBar, 10, barBottom - (barHeight* x));
 						}
-
-					}, false);
-					meterBar.src = 'meterbar.png';
+					});
+				
 				}
 				
 				

@@ -12,7 +12,7 @@
 			window.onload = function() {
 			
 				lifemeter.init({
-					month: 7,
+					month: 3,
 					day: 10,
 					year: 1984,
 					data: data.male
@@ -21,6 +21,16 @@
 				lifemeter.calculate();
 				
 				lifemeter.toLog();
+				
+				// todo:
+				/*
+					var canvas = new Canvas();
+					canvas.setImages();
+					canvas.drawFunc(function(images) {
+					
+					});
+					canvas.draw();
+				*/
 				
 				
 				function loadImages(sources, callbackFunc) {
@@ -55,10 +65,10 @@
 					loadImages(sources, function(images) {
 					
 						ctx.drawImage(images.bg, 0, 0);
-						ctx.drawImage(images.meterBg, 10, 10);
+						ctx.drawImage(images.meterBg, 30, 20);
 						
-						var barHeight = 4;
-						var barBottom = 117;
+						var barHeight = 8;
+						var barBottom = 235;
 						var numBarsFullHealth = 28;
 						var numBarsCurrentHealth = Math.round(numBarsFullHealth * lifemeter.results.meterValue);
 						
@@ -66,7 +76,7 @@
 							numBarsCurrentHealth = 1;
 						
 						for(var x = 0; x < numBarsCurrentHealth; x++) {
-							ctx.drawImage(images.meterBar, 10, barBottom - (barHeight* x));
+							ctx.drawImage(images.meterBar, 30, barBottom - (barHeight* x));
 						}
 					});
 				

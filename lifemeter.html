@@ -2,41 +2,16 @@
 <html>
 	<head>
 		<!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
-		
+
+		<script type="text/javascript" src="app.js"></script>
 		<script type="text/javascript" src="life-expectancy-data.js"></script>
 		<script type="text/javascript" src="calculator.js"></script> <!-- data -->
 		<script type="text/javascript" src="canvasHelper.js"></script> <!-- graphics mapulation -->
 		<script type="text/javascript" src="style.js"></script>
 		<script type="text/javascript" src="styles/megaman/script.js"></script> <!-- this game's style -->
-		
+
 		<script type="text/javascript">
-			window.onload = function() {
-
-				var calculator = new Calculator({
-					month: 3,
-					day: 10,
-					year: 1984,
-					data: data.male
-				});
-				
-				calculator.calculate();
-				calculator.toLog();
-
-				// build canvas 
-				var canvasHelper = new CanvasHelper({
-					canvasId: 'lifemeter-canvas',
-					width: 300,
-					height: 300
-				});
-
-				// todo: get current style
-				var style = new MegamanStyle({
-					calculatorResults: calculator.results
-				});
-				style.render(canvasHelper);
-								
-				
-			};
+			window.onload = new App();
 		</script>
 		
 		<style type="text/css">

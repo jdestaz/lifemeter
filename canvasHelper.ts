@@ -3,7 +3,7 @@
 	private canvas: any;
 	private canvasContext: any;
 
-	constructor(args) {
+	constructor(args: CanvasHelperArguments) {
 		this.canvas = document.getElementById(args.canvasId);
 
 		if (!this.canvas.getContext) {
@@ -34,4 +34,10 @@
 	drawImageToCanvas(image, x, y) {
 		this.canvasContext.drawImage(image, x, y);
 	}
+}
+
+interface CanvasHelperArguments {
+	canvasId: string;
+	width: number;
+	height: number;
 }

@@ -22,7 +22,7 @@ class Calculator {
 	expectancyData: number[];
 	results: CalculatorResults;
 
-	constructor(args: any) {
+	constructor(args: CalculatorArguments) {
 		this.birthMonth = args.month || 0;
 		this.birthDay = args.day || 0;
 		this.birthYear = args.year || 0;
@@ -123,4 +123,11 @@ class Calculator {
 	toLog() {
 		console.log(JSON.stringify(this));
 	}
+}
+
+interface CalculatorArguments {
+	month: number;
+	day: number;
+	year: number;
+	data: number[];
 }

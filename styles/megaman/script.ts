@@ -15,7 +15,7 @@ class MegamanStyle extends Style {
 		};
 	}
 
-	render(canvasHelper: CanvasHelper): any {
+	renderTo(canvasHelper: CanvasHelper): any {
 
 		canvasHelper.loadImages(this.imageSources, images => {
 

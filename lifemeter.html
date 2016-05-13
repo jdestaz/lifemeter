@@ -4,84 +4,37 @@
 		<!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
 		
 		<script type="text/javascript" src="life-expectancy-data.js"></script>
-		<script type="text/javascript" src="lifemeter.js"></script> <!-- data -->
-		<script type="text/javascript" src="canvas-util.js"></script> <!-- graphics mapulation -->
-		<script type="text/javascript" src="default-style.js"></script> <!-- this game's style -->
+		<script type="text/javascript" src="calculator.js"></script> <!-- data -->
+		<script type="text/javascript" src="canvasHelper.js"></script> <!-- graphics mapulation -->
+		<script type="text/javascript" src="style.js"></script>
+		<script type="text/javascript" src="styles/megaman/script.js"></script> <!-- this game's style -->
 		
 		<script type="text/javascript">
 			window.onload = function() {
-			
-				lifemeter.init({
+
+				var calculator = new Calculator({
 					month: 3,
 					day: 10,
 					year: 1984,
 					data: data.male
 				});
 				
-				lifemeter.calculate();
-				
-				lifemeter.toLog();
-				
-				// todo:
-				/*
-					var canvas = new Canvas();
-					canvas.setImages();
-					canvas.drawFunc(function(images) {
-					
-					});
-					canvas.draw();
-				*/
-				
-				
-				function loadImages(sources, callbackFunc) {
-					var images = {};
-					var loadedImages = 0;
-					var numImages = Object.keys(sources).length;
+				calculator.calculate();
+				calculator.toLog();
 
-					for(var source in sources) {
-						images[source] = new Image();
-						images[source].onload = function() {
-							if(++loadedImages >= numImages)
-								callbackFunc(images);
-						};
-						images[source].src = sources[source];
-					}
-				}
-				
 				// build canvas 
-				var canvas = document.getElementById('lifemeter-canvas');
-				
-				if(canvas.getContext) {
-					canvas.width = 300;
-					canvas.height = 300;
-					var ctx = canvas.getContext('2d');
-					
-					var sources = {
-						bg: 'bg.png',
-						meterBg: 'meterbg.png',
-						meterBar: 'meterbar.png'
-					};
-					
-					loadImages(sources, function(images) {
-					
-						ctx.drawImage(images.bg, 0, 0);
-						ctx.drawImage(images.meterBg, 30, 20);
-						
-						var barHeight = 8;
-						var barBottom = 235;
-						var numBarsFullHealth = 28;
-						var numBarsCurrentHealth = Math.round(numBarsFullHealth * lifemeter.results.meterValue);
-						
-						if(numBarsCurrentHealth < 1)
-							numBarsCurrentHealth = 1;
-						
-						for(var x = 0; x < numBarsCurrentHealth; x++) {
-							ctx.drawImage(images.meterBar, 30, barBottom - (barHeight* x));
-						}
-					});
-				
-				}
-				
+				var canvasHelper = new CanvasHelper({
+					canvasId: 'lifemeter-canvas',
+					width: 300,
+					height: 300
+				});
+
+				// todo: get current style
+				var style = new MegamanStyle({
+					calculatorResults: calculator.results
+				});
+				style.render(canvasHelper);
+								
 				
 			};
 		</script>

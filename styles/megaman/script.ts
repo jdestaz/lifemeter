@@ -6,7 +6,7 @@ class MegamanStyle extends Style {
 		super(args);
 
 		this.styleShortname = "megaman";
-		this.styleName = "Mega Man (8-bit)";
+		this.styleName = "Mega Man (8-bit)d";
 
 		this.imageSources = {
 			bg: this.getImagePath('bg.png'),

@@ -10,6 +10,8 @@
 	getImagePath(filename): string {
 		return `styles/${this.styleShortname}/${filename}`;
 	}
+
+	renderTo(canvasHelper: CanvasHelper): void {}
 }
 
 interface StyleArguments {

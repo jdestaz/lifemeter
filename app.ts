@@ -2,13 +2,43 @@
 
 	private data: LifeExpectancyData = this.getData();
 
-
 	constructor() {
+
+		// get parameters from query string
+		let month: number = parseInt(this.getQueryString('month'));
+		let day: number = parseInt(this.getQueryString('day'));
+		let year: number = parseInt(this.getQueryString('year'));
+
+		if (month === 0 || day === 0 || year === 0) {
+			console.log('Invalid date');
+			return;
+		}
+
+		let gender: string = this.getQueryString('gender');
+		let genderData: number[] = [];
+
+		if (gender === 'male')
+			genderData = this.data.male;
+		else if (gender === 'female')
+			genderData = this.data.female;
+
+		if (genderData.length === 0) {
+			console.log('Invalid gender');
+			return;
+		}
+
+		let style: string = this.getQueryString('style');
+		let styleConfig: StyleConfig = this.getStyleConfig(style);
+		if (styleConfig === null) {
+			console.log('Invalid style');
+			return;
+		}
+		
 		let calculator = new Calculator({
-			month: 3,
-			day: 10,
-			year: 1984,
-			data: this.data.male
+			month: month,
+			day: day,
+			year: year,
+			data: genderData
 		});
 
 		calculator.calculate();
@@ -17,23 +47,62 @@
 		// build canvas 
 		let canvasHelper = new CanvasHelper({
 			canvasId: 'lifemeter-canvas',
-			width: 300,
-			height: 300
+			width: styleConfig.width,
+			height: styleConfig.height
 		});
 
-		// todo: get current style
-		let style = new MegamanStyle({
-			calculatorResults: calculator.results
+		// get current style
+		this.loadScript(`styles/${style}/script.js`, () => {
+			let styleObj: Style = this.getStyleObj(styleConfig, calculator.results);
+			styleObj.renderTo(canvasHelper);
 		});
-		style.renderTo(canvasHelper);
 	}
 
-	getQueryString(field: string, url: string): string {
+	getQueryString(field: string, url?: string): string {
 		let href: string = url ? url : window.location.href;
 		let reg: RegExp = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
 		let string: RegExpExecArray = reg.exec(href);
 
 		return string ? string[1] : null;
+	}
+
+	loadScript(url, callback) {
+
+		let script: any = document.createElement('script');
+		script.type = 'text/javascript';
+
+		if (script.readyState) {  //IE
+			script.onreadystatechange = () => {
+				if (script.readyState === 'loaded' ||
+					script.readyState === 'complete') {
+					script.onreadystatechange = null;
+					callback();
+				}
+			};
+		} else {  //Others
+			script.onload = () => {
+				callback();
+			};
+		}
+
+		script.src = url;
+		document.getElementsByTagName('head')[0].appendChild(script);
+	}
+
+	getStyleObj(style: StyleConfig, results: CalculatorResults): Style {
+		return eval(`new ${style.className}({calculatorResults: results});`);
+	}
+
+	getStyleConfig(style: string): StyleConfig {
+		let configs = new StyleConfigs().styles;
+
+		for (let i: number = 0; i < configs.length; i++) {
+			if (configs[i].shortName === style) {
+				return configs[i];
+			}
+		}
+
+		return null;
 	}
 
 	getData(): LifeExpectancyData {

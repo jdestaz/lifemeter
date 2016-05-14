@@ -1,12 +1,12 @@
-class MegamanStyle extends Style {
+class MegaManStyle extends Style {
 
 	private imageSources: any;
 
 	constructor(args) {
 		super(args);
 
-		this.styleShortname = "megaman";
-		this.styleName = "Mega Man (8-bit)d";
+		this.styleShortname = 'megaman';
+		this.styleName = 'Mega Man (8-bit)';
 
 		this.imageSources = {
 			bg: this.getImagePath('bg.png'),
@@ -15,7 +15,7 @@ class MegamanStyle extends Style {
 		};
 	}
 
-	renderTo(canvasHelper: CanvasHelper): any {
+	renderTo(canvasHelper: CanvasHelper): void {
 
 		canvasHelper.loadImages(this.imageSources, images => {
 

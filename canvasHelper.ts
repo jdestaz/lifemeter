@@ -6,7 +6,7 @@
 	constructor(args: CanvasHelperArguments) {
 		this.canvas = document.getElementById(args.canvasId);
 
-		if (!this.canvas.getContext) {
+		if (this.canvas === null) {
 			console.log('Invalid canvas id');
 			return;
 		}

@@ -14,8 +14,8 @@
 			name: "Shovel Knight",
 			shortName: "shovelknight",
 			className: "ShovelKnightStyle",
-			width: 300,
-			height: 300
+			width: 450,
+			height: 450
 		});
 	}
 }

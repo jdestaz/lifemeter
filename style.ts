@@ -5,6 +5,7 @@
 
 	constructor(args: StyleArguments) {
 		this.calculatorResults = args.calculatorResults;
+		this.styleShortname = args.styleShortname;
 	}
 
 	getImagePath(filename): string {
@@ -16,4 +17,5 @@
 
 interface StyleArguments {
 	calculatorResults: CalculatorResults;
+	styleShortname: string;
 }

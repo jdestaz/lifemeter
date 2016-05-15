@@ -90,7 +90,9 @@
 	}
 
 	getStyleObj(style: StyleConfig, results: CalculatorResults): Style {
-		return eval(`new ${style.className}({calculatorResults: results});`);
+		let styleObj: Style = eval(`new ${style.className}({calculatorResults: results, styleShortname: style.shortName});`);
+
+		return styleObj;
 	}
 
 	getStyleConfig(style: string): StyleConfig {

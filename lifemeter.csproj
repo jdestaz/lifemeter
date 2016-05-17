@@ -45,15 +45,21 @@
   <ItemGroup>
     <Content Include="canvas-util.js" />
     <Content Include="index.html" />
-    <Content Include="life-expectancy-data.js" />
     <Content Include="lifemeter-embed.js" />
     <Content Include="lifemeter.html" />
     <Content Include="lifemeter.js" />
     <Content Include="styles\megaman\bg.png" />
-    <Content Include="styles\megaman\default-style.js" />
+    <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="style.ts" />
+    <TypeScriptCompile Include="styles\megaman\script.ts" />
     <Content Include="styles\megaman\meterbar.png" />
     <Content Include="styles\megaman\meterbg.png" />
+    <Content Include="styles\shovelknight\bg.png" />
+    <Content Include="styles\shovelknight\emptybar.png" />
+    <Content Include="styles\shovelknight\fullbar.png" />
+    <Content Include="styles\shovelknight\halfbar.png" />
     <Content Include="thirdparty.html" />
+    <TypeScriptCompile Include="styles\shovelknight\script.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="calculator.ts" />
@@ -61,11 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
+    <TypeScriptCompile Include="style-config.ts" />
     <None Include="tsconfig.json" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="styles\shovelknight\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

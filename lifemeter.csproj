@@ -45,11 +45,12 @@
   <ItemGroup>
     <Content Include="canvas-util.js" />
     <Content Include="index.html" />
-    <Content Include="lifemeter-embed.js" />
+    <TypeScriptCompile Include="lifemeter-embed.ts" />
     <Content Include="lifemeter.html" />
     <Content Include="lifemeter.js" />
     <Content Include="styles\megaman\bg.png" />
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="style-config.d.ts" />
     <TypeScriptCompile Include="style.ts" />
     <TypeScriptCompile Include="styles\megaman\script.ts" />
     <Content Include="styles\megaman\meterbar.png" />

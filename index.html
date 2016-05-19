@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+
+	<script type="text/javascript" src="style-config.js"></script>
+
+	<script type="text/javascript">
+		window.onload = function () {
+			var configs = new StyleConfigs().styles;
+			var body = document.getElementsByTagName('body');
+
+			var month = 3;
+			var day = 12;
+			var year = 1984;
+			var gender = 'male';
+
+			for (var i = 0; i < configs.length; i++) {
+				var style = configs[i];
+				var meter = document.createElement('iframe');
+				meter.src = 'lifemeter.html?month=' + month + '&day=' + day + '&year=' + year + '&gender=' + gender + '&style=' + style.shortName;
+				meter.className = 'lifemeter style-' + style.shortName;
+				meter.height = style.height;
+				meter.width = style.width;
+				meter.style = 'border: 0; overflow: hidden; margin: 0; padding: 0';
+				meter.scrolling = 'no';
+
+
+				body[0].appendChild(meter);
+			}		
+		}
+	</script>
+
+	
+</head>
+<body>
+	
+</body>
+</html>

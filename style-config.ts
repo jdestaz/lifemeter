@@ -1,4 +1,6 @@
-﻿class StyleConfigs {
+﻿///<reference path="style-config.d.ts"/>
+
+class StyleConfigs {
 	styles: StyleConfig[] = [];
 
 	constructor() {
@@ -21,10 +23,3 @@
 }
 
 
-interface StyleConfig {
-	name: string;
-	shortName: string;
-	className: string;
-	width: number;
-	height: number;
-}

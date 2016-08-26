@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+	<title>LifeMeter</title>
+
 	<!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
+
+
 
 	<script type="text/javascript" src="style-config.js"></script>
 
 	<script type="text/javascript">
-		window.onload = function () {
+		window.onload = function() {
 
 			setDefaultInput();
 			generateMeters();
@@ -33,16 +43,8 @@
 			var gender = getSelectedGender();
 
 			for (var i = 0; i < configs.length; i++) {
-				var style = configs[i];
-				var meter = document.createElement('iframe');
-				meter.src = 'lifemeter.html?month=' + month + '&day=' + day + '&year=' + year + '&gender=' + gender + '&style=' + style.shortName;
-				meter.className = 'lifemeter style-' + style.shortName;
-				meter.height = style.height;
-				meter.width = style.width;
-				meter.style = 'border: 0; overflow: hidden; margin: 0; padding: 0';
-				meter.scrolling = 'no';
-
-				container.appendChild(meter);
+				var iframe = getiFrame(configs[i], month, day, year, gender);
+				container.appendChild(iframe);
 			}
 		}
 
@@ -57,20 +59,61 @@
 
 			return '';
 		}
+
+		function getiFrame(style, month, day, year, gender) {
+			var meter = document.createElement('iframe');
+			meter.src = 'lifemeter.html?month=' + month + '&day=' + day + '&year=' + year + '&gender=' + gender + '&style=' + style.shortName;
+			meter.className = 'lifemeter style-' + style.shortName;
+			meter.height = style.height;
+			meter.width = style.width;
+			meter.style = 'border: 0; overflow: hidden; margin: 0; padding: 0';
+			meter.scrolling = 'no';
+
+			return meter;			
+		}
 	</script>
 
-	
+
 </head>
 <body>
-	<div id="input">
-		Month <input type="text" id="input-month"/><br/>
-		Day <input type="text" id="input-day"/><br/>
-		Year <input type="text" id="input-year"/><br/>
-		Gender <label><input type="radio" name="gender" id="input-gender-male" value="male" /> Male</label> <label><input type="radio" name="gender" id="input-gender-female" value="female" /> Female</label><br/>
-		<button type="button" id="go">Go</button>
+
+	<nav class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">LifeMeter</a>
+			</div>
+			<form id="input" class="navbar-form navbar-left">
+				<div class="form-group">
+					<label for="input-month">Month</label>
+					<input type="text" class="form-control" id="input-month" />
+				</div>
+				<div class="form-group">
+					<label for="input-day">Day</label>
+					<input type="text" class="form-control" id="input-day" />
+				</div>
+				<div class="form-group">
+					<label for="input-year">Year</label>
+					<input type="text" class="form-control" id="input-year"/>
+				</div>
+				<label class="radio-inline">
+					<input type="radio" name="gender" id="input-gender-male" value="male"> Male
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="gender" id="input-gender-female" value="female"> Female
+				</label>
+
+
+				<button type="button" class="btn btn-default" id="go">Go</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div id="meters"></div>
+		</div>
 	</div>
 
-	<div id="meters"></div>
 
 </body>
 </html>

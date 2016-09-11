@@ -43,13 +43,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="canvas-util.js" />
     <Content Include="index.html" />
-    <TypeScriptCompile Include="lifemeter-embed.ts" />
-    <Content Include="lifemeter.html" />
-    <Content Include="lifemeter.js" />
+    <TypeScriptCompile Include="data.ts" />
     <Content Include="styles\megaman\bg.png" />
-    <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="style-config.d.ts" />
     <TypeScriptCompile Include="style.ts" />
     <TypeScriptCompile Include="styles\megaman\script.ts" />
@@ -59,7 +55,6 @@
     <Content Include="styles\shovelknight\emptybar.png" />
     <Content Include="styles\shovelknight\fullbar.png" />
     <Content Include="styles\shovelknight\halfbar.png" />
-    <Content Include="thirdparty.html" />
     <TypeScriptCompile Include="styles\shovelknight\script.ts" />
   </ItemGroup>
   <ItemGroup>

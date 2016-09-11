@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8"/>
@@ -9,14 +9,22 @@
 
 	<title>LifeMeter</title>
 
-	<!--[if lte IE 8]><script type="text/javascript" src="excanvas.js"></script><![endif]-->
-
-
-
 	<script type="text/javascript" src="style-config.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+	<script type="text/javascript" src="calculator.js"></script>
+	<script type="text/javascript" src="canvasHelper.js"></script>
+	<script type="text/javascript" src="style.js"></script>
+	<script type="text/javascript" src="styles.js"></script>
+
 
 	<script type="text/javascript">
-		window.onload = function() {
+
+		var calculator;
+		var data = new Data().getData();
+		var genderData;
+
+		window.onload = function () {
+
 
 			setDefaultInput();
 			generateMeters();
@@ -32,6 +40,8 @@
 		}
 
 		function generateMeters() {
+			
+
 			var configs = new StyleConfigs().styles;
 			var container = document.getElementById('meters');
 
@@ -42,9 +52,37 @@
 			var year = document.getElementById('input-year').value;
 			var gender = getSelectedGender();
 
+			if (gender === 'male')
+				genderData = data.male;
+			else if (gender === 'female')
+				genderData = data.female;
+
+			calculator = new Calculator({
+				month: month,
+				day: day,
+				year: year,
+				data: genderData
+			});
+
+			calculator.calculate();
+			calculator.toLog();
+
+
 			for (var i = 0; i < configs.length; i++) {
-				var iframe = getiFrame(configs[i], month, day, year, gender);
-				container.appendChild(iframe);
+				var style = configs[i];
+				var styleObj = eval(`new ${style.className}({calculatorResults: calculator.results, styleShortname: style.shortName});`);
+
+				var canvas = document.createElement("canvas");
+				canvas.id = 'canvas-' + style.shortName;
+				container.appendChild(canvas);
+
+				var canvasHelper = new CanvasHelper({
+					canvasId: 'canvas-' + style.shortName,
+					width: style.width,
+					height: style.height
+				});
+
+				styleObj.renderTo(canvasHelper);
 			}
 		}
 
@@ -60,59 +98,64 @@
 			return '';
 		}
 
-		function getiFrame(style, month, day, year, gender) {
-			var meter = document.createElement('iframe');
-			meter.src = 'lifemeter.html?month=' + month + '&day=' + day + '&year=' + year + '&gender=' + gender + '&style=' + style.shortName;
-			meter.className = 'lifemeter style-' + style.shortName;
-			meter.height = style.height;
-			meter.width = style.width;
-			meter.style = 'border: 0; overflow: hidden; margin: 0; padding: 0';
-			meter.scrolling = 'no';
-
-			return meter;			
-		}
 	</script>
 
 
 </head>
 <body>
 
-	<nav class="navbar navbar-default navbar-static-top">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#">LifeMeter</a>
-			</div>
-			<form id="input" class="navbar-form navbar-left">
-				<div class="form-group">
-					<label for="input-month">Month</label>
-					<input type="text" class="form-control" id="input-month" />
-				</div>
-				<div class="form-group">
-					<label for="input-day">Day</label>
-					<input type="text" class="form-control" id="input-day" />
-				</div>
-				<div class="form-group">
-					<label for="input-year">Year</label>
-					<input type="text" class="form-control" id="input-year"/>
-				</div>
-				<label class="radio-inline">
-					<input type="radio" name="gender" id="input-gender-male" value="male"> Male
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="gender" id="input-gender-female" value="female"> Female
-				</label>
 
-
-				<button type="button" class="btn btn-default" id="go">Go</button>
-			</form>
-		</div>
-	</nav>
-
+<div class="jumbotron">
 	<div class="container">
+
 		<div class="row">
-			<div id="meters"></div>
+			<div class="col-md-9">
+				<h1>LifeMeter</h1>
+				<p>Description of things.</p>
+			</div>
+
+			<div class="col-md-3">
+				<form id="input">
+					
+					<div class="form-group">
+						<label for="input-month">Month</label>
+						<input type="text" class="form-control" id="input-month"/>
+					</div>
+					<div class="form-group">
+						<label for="input-day">Day</label>
+						<input type="text" class="form-control" id="input-day"/>
+					</div>
+					<div class="form-group">
+						<label for="input-year">Year</label>
+						<input type="text" class="form-control" id="input-year"/>
+					</div>
+					<div class="form-group">
+						<label class="radio-inline">
+							<input type="radio" name="gender" id="input-gender-male" value="male"> Male
+						</label>
+						<label class="radio-inline">
+							<input type="radio" name="gender" id="input-gender-female" value="female"> Female
+						</label>
+					</div>
+
+
+					<div class="form-group">
+						<button type="button" class="btn btn-default" id="go">Go</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<div id="meters">	
+			
+		</div>
+	</div>
+</div>
 
 
 </body>

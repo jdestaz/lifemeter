@@ -1,0 +1,1 @@
+Get-ChildItem -recurse styles\src*.js | Get-Content | out-file scripts/styles.js

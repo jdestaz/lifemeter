@@ -1,22 +1,36 @@
 
+var data = new Data();
+var styleService = new StyleService({ styles: styles });
+
 window.onload = function() {
-    var data = new Data();
+    SetInitialInputValues();
+    GenerateMeters();
+
+    document.getElementById('go').addEventListener('click', GenerateMeters);
+}
+
+function SetInitialInputValues() {
+    document.getElementById('input-month').value = 3;
+    document.getElementById('input-day').value = 12;
+    document.getElementById('input-year').value = 1984;
+    document.getElementById('input-gender-male').checked = 'checked';
+}
+
+function GenerateMeters() {
     var calculator = new Calculator({
-        birthMonth: 3,
-        birthDay: 12,
-        birthYear: 1984,
-        expectancyData: data.Male
+        birthMonth: document.getElementById('input-month').value,
+        birthDay: document.getElementById('input-day').value,
+        birthYear: document.getElementById('input-year').value,
+        expectancyData: (document.getElementById('input-gender-male').checked === 'checked') ? data.Male : data.Female
     })
 
     var results = calculator.calculate();
 
-    calculator.toLog();
-
-    var styleService = new StyleService({
-        styles: styles
-    });
-
     var container = document.getElementById('lifemeters');
+    while(container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+
 
     for(var i = 0; i < styles.length; i++) {
         var style = styles[i];
@@ -36,6 +50,7 @@ window.onload = function() {
 function CreateCanvasForStyle(style) {
     var canvas = document.createElement('canvas');
     canvas.id = 'lifemeter-' + style.shortName;
+    canvas.className = 'meter';
 
     return canvas;
 }

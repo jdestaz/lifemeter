@@ -5,6 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <link href="content/normalize.css" rel="stylesheet" />
+    <link href="content/style.css" rel="stylesheet" />
 
 	<title>LifeMeter</title>
 
@@ -16,11 +18,50 @@
 
     <script type="text/javascript" src="scripts/main.js"></script>
 
-
 </head>
 <body>
 
-    <div id="lifemeters"></div>
+    <div id="header" class="center-column">
+
+        <h1>LifeMeter</h1>
+        <p>Life expectancy calculator with a video game twist. Data from <a href="https://www.ssa.gov/oact/STATS/table4c6.html">US Social Security Administration</a>.</p>
+
+    </div>
+
+    <div id="inputs" class="center-column">
+        <form id="input">
+            
+            <div class="form-group">
+                <label for="input-month">Month</label>
+                <input type="text" class="form-control" id="input-month"/>
+            </div>
+            <div class="form-group">
+                <label for="input-day">Day</label>
+                <input type="text" class="form-control" id="input-day"/>
+            </div>
+            <div class="form-group">
+                <label for="input-year">Year</label>
+                <input type="text" class="form-control" id="input-year"/>
+            </div>
+            <div class="form-group">
+                <label class="radio-inline">
+                    <input type="radio" name="gender" id="input-gender-male" value="male"> Male
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="gender" id="input-gender-female" value="female"> Female
+                </label>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn btn-default" id="go">Go</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="lifemeters" class="center-column clearfix">
+
+    </div>
 
 </body>
 </html>

@@ -3,13 +3,13 @@ var styles = styles || [];
 styles.push({
     name: "Shovel Knight",
     shortName: "shovelknight",
-    width: 450,
-    height: 450,
+    width: 300,
+    height: 300,
     
-    BARWIDTH: 39,
-	BARPADDING: 5,
+    BARWIDTH: 22,
+	BARPADDING: 3,
 	MAXBARS: 10,
-	YPOS: 38,
+	YPOS: 32,
 	STARTXPOS: 5,
 
     renderTo(canvasWriter, styleService, calculatorResults) {

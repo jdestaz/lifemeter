@@ -1,8 +1,8 @@
 var styles = styles || [];
 
 styles.push({
-    name: "The Legend of Zelda (8-bit)",
-    shortName: "zelda",
+    name: "The Legend of Zelda",
+    shortName: "thelegendofzelda",
     width: 300,
     height: 300,
     

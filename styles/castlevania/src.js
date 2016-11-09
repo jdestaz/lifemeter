@@ -1,16 +1,16 @@
 var styles = styles || [];
 
 styles.push({
-    name: "Kirby's Adventure",
-    shortName: "kirbyadventure",
+    name: "Castlevania",
+    shortName: "castlevania",
     width: 300,
     height: 300,
     
-    BARWIDTH: 14,
+    BARWIDTH: 6,
 	BARPADDING: 2,
-	MAXBARS: 6,
-	YPOS: 214,
-	STARTXPOS: 160,
+	MAXBARS: 16,
+	YPOS: 15,
+	STARTXPOS: 128,
 
     renderTo(canvasWriter, styleService, calculatorResults) {
 

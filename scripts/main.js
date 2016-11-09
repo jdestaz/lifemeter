@@ -5,15 +5,17 @@ var styleService = new StyleService({ styles: styles });
 window.onload = function() {
     SetInitialInputValues();
     GenerateMeters();
-
-    document.getElementById('go').addEventListener('click', GenerateMeters);
 }
 
 function SetInitialInputValues() {
-    document.getElementById('input-month').value = 3;
-    document.getElementById('input-day').value = 12;
-    document.getElementById('input-year').value = 1984;
-    document.getElementById('input-gender-male').checked = 'checked';
+    document.getElementById('input-month').value = GetQueryParameter('month') || GetRandomIntInclusive(1, 12);
+    document.getElementById('input-day').value = GetQueryParameter('day') || GetRandomIntInclusive(1, 28);
+    document.getElementById('input-year').value = GetQueryParameter('year') || GetRandomIntInclusive(1940, 2010);
+    
+    var gender = GetQueryParameter('gender') || GetRandomGender();
+
+    if(gender === 'male') { document.getElementById('input-gender-male').checked = 'checked'; }
+    if(gender === 'female') { document.getElementById('input-gender-female').checked = 'checked'; }
 }
 
 function GenerateMeters() {
@@ -53,4 +55,26 @@ function CreateCanvasForStyle(style) {
     canvas.className = 'meter';
 
     return canvas;
+}
+
+function GetQueryParameter(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function GetRandomIntInclusive(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function GetRandomGender() {
+    return GetRandomIntInclusive(0,1) === 0 ? 'male' : 'female';
 }

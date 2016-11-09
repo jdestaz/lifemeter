@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <link href="content/normalize.css" rel="stylesheet" />
+    <link href="content/pure-nr-min.css" rel="stylesheet" />
     <link href="content/style.css" rel="stylesheet" />
 
 	<title>LifeMeter</title>
@@ -28,33 +29,46 @@
 
     </div>
 
-    <div id="inputs" class="center-column">
-        <form id="input">
-            
-            <div class="form-group">
-                <label for="input-month">Month</label>
-                <input type="text" class="form-control" id="input-month"/>
-            </div>
-            <div class="form-group">
-                <label for="input-day">Day</label>
-                <input type="text" class="form-control" id="input-day"/>
-            </div>
-            <div class="form-group">
-                <label for="input-year">Year</label>
-                <input type="text" class="form-control" id="input-year"/>
-            </div>
-            <div class="form-group">
-                <label class="radio-inline">
-                    <input type="radio" name="gender" id="input-gender-male" value="male"> Male
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="gender" id="input-gender-female" value="female"> Female
-                </label>
-            </div>
+    <div id="inputs" class="center-column clearfix">
+        <form id="input" type="GET" class="pure-form">
+            <fieldset>
+                <legend></legend>
 
-            <div class="form-group">
-                <button type="button" class="btn btn-default" id="go">Go</button>
-            </div>
+                <select id="input-month" name="month">
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+
+                <input type="text" size="2" maxlength="2" id="input-day" name="day" placeholder="Day"/>
+
+                <input type="text" size="4" maxlength="4" id="input-year" name="year" placeholder="Year"/>
+
+                <button type="submit" class="pure-button pure-button-primary" id="go">Go</button>
+
+
+                <label class="pure-radio">
+                    <input type="radio" name="gender" id="input-gender-male" value="male"> 
+                    Male
+                </label>
+                <label class="pure-radio">
+                    <input type="radio" name="gender" id="input-gender-female" value="female"> 
+                    Female
+                </label>
+
+
+            </fieldset>
+
+
         </form>
     </div>
 
